@@ -7,7 +7,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
 import scala.actors.threadpool.Arrays;
+import universalelectricity.sample.wires.BlockWire;
 
 /**
  * Created by robert on 8/22/2014.
@@ -26,14 +31,18 @@ public class UESampleMod
     @Mod.Metadata(MOD_ID)
     public static ModMetadata metadata  = null;
 
+    public static Block wire;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent evt)
     {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
         //Create Blocks
+        wire = new BlockWire().setCreativeTab(CreativeTabs.tabRedstone);
 
         //Register Blocks
+        GameRegistry.registerBlock(wire, "blockWire");
 
         //Create Items
 

@@ -13,7 +13,7 @@ public class Tile extends TileEntity implements IVectorWorld
     protected long ticks = 0L;
 
     /** Called on the first world tick of this tile */
-    public void init()
+    public void start()
     {
 
     }
@@ -24,7 +24,7 @@ public class Tile extends TileEntity implements IVectorWorld
         super.updateEntity();
         if(ticks == 0)
         {
-            init();
+            start();
         }
         else if(ticks + 1 == Long.MAX_VALUE)
         {
