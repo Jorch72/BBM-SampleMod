@@ -2,12 +2,10 @@ package universalelectricity.sample.wires;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import universalelectricity.api.core.grid.IGrid;
-import universalelectricity.api.core.grid.IGridNode;
 import universalelectricity.api.core.grid.INodeProvider;
 import universalelectricity.api.core.grid.electric.IEnergyNode;
-import universalelectricity.core.grid.node.NodeConductor;
-import universalelectricity.simulator.Network;
-import universalelectricity.simulator.energy.EnergyNetwork;
+import universalelectricity.simulator.SimulatedGrid;
+import universalelectricity.simulator.energy.EnergySimulatedGrid;
 import universalelectricity.simulator.peaces.NetworkNode;
 
 /**
@@ -49,18 +47,18 @@ public class NodeEnergyWire extends NetworkNode implements IEnergyNode {
     @Override
     public void setGrid(IGrid grid)
     {
-        if(grid instanceof EnergyNetwork)
+        if(grid instanceof EnergySimulatedGrid)
         {
            super.setGrid(grid);
         }
     }
 
     @Override
-    public Network getGrid()
+    public SimulatedGrid getGrid()
     {
         if(network == null)
         {
-            super.setGrid(new EnergyNetwork(this));
+            super.setGrid(new EnergySimulatedGrid(this));
         }
         return super.getGrid();
     }
