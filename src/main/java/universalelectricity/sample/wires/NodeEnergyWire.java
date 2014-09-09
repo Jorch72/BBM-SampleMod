@@ -4,9 +4,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 import universalelectricity.api.core.grid.IGrid;
 import universalelectricity.api.core.grid.INodeProvider;
 import universalelectricity.api.core.grid.electric.IEnergyNode;
-import universalelectricity.simulator.SimulatedGrid;
 import universalelectricity.simulator.energy.EnergySimulatedGrid;
-import universalelectricity.simulator.peaces.NetworkNode;
+import universalelectricity.simulator.grid.LinkedGrid;
+import universalelectricity.simulator.grid.component.NetworkNode;
 
 /**
  * Extended version of th conductor node that only connects to energy based tiles
@@ -54,7 +54,7 @@ public class NodeEnergyWire extends NetworkNode implements IEnergyNode {
     }
 
     @Override
-    public SimulatedGrid getGrid()
+    public LinkedGrid getGrid()
     {
         if(network == null)
         {
