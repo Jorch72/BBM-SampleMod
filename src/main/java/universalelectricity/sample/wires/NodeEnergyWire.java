@@ -5,14 +5,14 @@ import universalelectricity.api.core.grid.IGrid;
 import universalelectricity.api.core.grid.INodeProvider;
 import universalelectricity.api.core.grid.electric.IEnergyNode;
 import universalelectricity.simulator.energy.EnergySimulatedGrid;
-import universalelectricity.simulator.grid.LinkedGrid;
-import universalelectricity.simulator.grid.component.NetworkNode;
+import universalelectricity.simulator.grid.SimulatedGrid;
+import universalelectricity.simulator.grid.component.SimNode;
 
 /**
  * Extended version of th conductor node that only connects to energy based tiles
  * @author Darkguardsman
  */
-public class NodeEnergyWire extends NetworkNode implements IEnergyNode {
+public class NodeEnergyWire extends SimNode implements IEnergyNode {
 
     public NodeEnergyWire(INodeProvider parent)
     {
@@ -54,7 +54,7 @@ public class NodeEnergyWire extends NetworkNode implements IEnergyNode {
     }
 
     @Override
-    public LinkedGrid getGrid()
+    public SimulatedGrid getGrid()
     {
         if(network == null)
         {
