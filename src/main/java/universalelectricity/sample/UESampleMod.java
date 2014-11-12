@@ -11,8 +11,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
+import resonant.content.loader.ModManager;
 import scala.actors.threadpool.Arrays;
-import universalelectricity.sample.wires.BlockWire;
+import universalelectricity.sample.wires.TileWire;
 
 /**
  * Created by robert on 8/22/2014.
@@ -31,6 +32,8 @@ public class UESampleMod
     @Mod.Metadata(MOD_ID)
     public static ModMetadata metadata  = null;
 
+    public static ModManager manager = new ModManager().setPrefix("universalelectricity").setTab(CreativeTabs.tabRedstone);
+
     public static Block wire;
 
     @Mod.EventHandler
@@ -39,14 +42,10 @@ public class UESampleMod
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
 
         //Create Blocks
-        wire = new BlockWire().setCreativeTab(CreativeTabs.tabRedstone);
+        wire = manager.newBlock(TileWire.class);
 
-        //Register Blocks
-        GameRegistry.registerBlock(wire, "blockWire");
 
         //Create Items
-
-        //Register Items
 
         proxy.preInit();
     }

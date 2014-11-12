@@ -1,50 +1,53 @@
 package universalelectricity.sample.machines;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
-import universalelectricity.sample.prefab.TileMachine;
-import universalelectricity.sample.prefab.TileSingleSlotMachine;
+import resonant.lib.content.prefab.java.TileElectricInventory;
 
 /**
  * Created by robert on 8/24/2014.
  */
-public class TileGenerator  extends TileSingleSlotMachine
+public class TileGenerator extends TileElectricInventory
 {
     int ticksToBurn = 0;
 
     public TileGenerator()
-{
-    super();
-    buffer().setCapacity(10000);
-    buffer().setMaxReceive(0);
-    buffer().setMaxExtract(1000);
-}
+    {
+        super(Material.rock);
+        setCapacity(10000);
+        setMaxReceive(0);
+        setMaxExtract(1000);
+    }
 
     @Override
-    public void updateEntity()
+    public void update()
     {
-        super.updateEntity();
-        if(ticksToBurn > 0)
+        super.update();
+        if (ticksToBurn > 0)
         {
             ticksToBurn--;
         }
-        if(ticksToBurn <= 10 && TileEntityFurnace.isItemFuel(slotStack))
+        if (ticksToBurn <= 10 && TileEntityFurnace.isItemFuel(fuelStack()))
         {
-            ticksToBurn += TileEntityFurnace.getItemBurnTime(slotStack);
-            slotStack.stackSize--;
-            if(slotStack.stackSize <= 0)
+            ticksToBurn += TileEntityFurnace.getItemBurnTime(fuelStack());
+            fuelStack().stackSize--;
+            if (fuelStack().stackSize <= 0)
             {
-                slotStack = null;
+                setInventorySlotContents(0, null);
             }
         }
-        if(ticksToBurn > 0)
+        if (ticksToBurn > 0)
         {
-            buffer().receiveEnergy();
+            getEnergyStorage().receiveEnergy();
         }
+    }
+
+    /** @return stack in slot one */
+    public ItemStack fuelStack()
+    {
+        return getStackInSlot(0);
     }
 
     @Override
@@ -62,12 +65,14 @@ public class TileGenerator  extends TileSingleSlotMachine
     }
 
     @Override
-    public boolean isItemValidForSlot(int slot, ItemStack stack) {
+    public boolean isItemValidForSlot(int slot, ItemStack stack)
+    {
         return slot == 0 && TileEntityFurnace.isItemFuel(stack);
     }
 
     @Override
-    public String getInventoryName() {
+    public String getInventoryName()
+    {
         return "SampleGenerator";
     }
 }

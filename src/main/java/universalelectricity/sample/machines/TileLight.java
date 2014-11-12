@@ -1,30 +1,31 @@
 package universalelectricity.sample.machines;
 
-import universalelectricity.sample.prefab.TileMachine;
+import net.minecraft.block.material.Material;
+import resonant.lib.content.prefab.java.TileElectric;
 
 /**
  * Created by robert on 8/24/2014.
  */
-public class TileLight extends TileMachine
+public class TileLight extends TileElectric
 {
     public boolean isPowered = false;
 
     public TileLight()
     {
-        super();
-        buffer().setMaxReceive(2);
-        buffer().setMaxExtract(1);
-        buffer().setCapacity(10);
+        super(Material.rock);
+        setMaxReceive(2);
+        setMaxExtract(1);
+        setCapacity(10);
     }
 
     @Override
-    public void updateEntity()
+    public void update()
     {
-        super.updateEntity();
+        super.update();
         isPowered = false;
-        if(buffer().checkExtract())
+        if(getEnergyStorage().checkExtract())
         {
-            buffer().extractEnergy();
+            getEnergyStorage().extractEnergy();
             isPowered = true;
         }
     }
