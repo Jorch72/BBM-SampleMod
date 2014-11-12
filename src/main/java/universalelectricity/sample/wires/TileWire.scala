@@ -31,9 +31,9 @@ class TileWire extends TileNode(Material.cloth) with TEnergyBuffer with INodePro
     {
       if(server)
       {
-        player.addChatComponentMessage(new ChatComponentText("TileWire: " + this +"  Node: " + node));
-        player.addChatComponentMessage(new ChatComponentText("V: " + node.getVolts() +"  A: " + node.getAmps()));
-        player.addChatComponentMessage(new ChatComponentText("Br: " + node.getBranch));
+        player.addChatComponentMessage(new ChatComponentText("TileWire: " + this +"  Node: " + getNode()));
+        player.addChatComponentMessage(new ChatComponentText("V: " + getNode().getVolts() +"  A: " + getNode().getAmps()));
+        player.addChatComponentMessage(new ChatComponentText("Br: " + getNode().getBranch));
       }
       return true;
     }
@@ -51,11 +51,16 @@ class TileWire extends TileNode(Material.cloth) with TEnergyBuffer with INodePro
   {
     if(nodeType.isAssignableFrom(classOf[NodeElectric]))
     {
-      if(node == null)
-        node = new NodeElectric(this)
-      return node.asInstanceOf[N]
+      return getNode().asInstanceOf[N]
     }
     return null.asInstanceOf[N]
+  }
+
+  def getNode() : NodeElectric =
+  {
+    if(node == null)
+      node = new NodeElectric(this)
+    return node
   }
 
   override def getNodes (nodes: java.util.List[INode]) : Unit =
