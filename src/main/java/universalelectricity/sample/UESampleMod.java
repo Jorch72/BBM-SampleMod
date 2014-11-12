@@ -18,7 +18,7 @@ import universalelectricity.sample.wires.TileWire;
 /**
  * Created by robert on 8/22/2014.
  */
-@Mod(modid = UESampleMod.NAME, name = UESampleMod.MOD_ID, version = UESampleMod.VERSION, dependencies = "required-after:UniversalElectricity")
+@Mod(modid = UESampleMod.NAME, name = UESampleMod.MOD_ID, version = UESampleMod.VERSION, dependencies = "required-after:ResonantEngine")
 public class UESampleMod
 {
     public static final String NAME = "UE Sample Mod";
