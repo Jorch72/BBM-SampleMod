@@ -3,7 +3,7 @@ package universalelectricity.sample.machines;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import resonant.lib.content.prefab.java.TileElectricInventory;
+import resonant.lib.prefab.tile.TileElectricInventory;
 
 /**
  * Created by robert on 8/24/2014.

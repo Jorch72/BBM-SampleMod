@@ -1,6 +1,6 @@
 package universalelectricity.sample.machines;
 import net.minecraft.block.material.Material;
-import resonant.lib.content.prefab.java.TileElectricInventory;
+import resonant.lib.prefab.tile.TileElectricInventory;
 /** Battery box that uses internal items for energy storage.
  * Is an example of item charging, discharging, and storage
  *
