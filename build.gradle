@@ -1,95 +1,140 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
         maven {
-            // Add maven repo for SpecialSource
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
     dependencies {
-	classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
-apply plugin: 'scala'
+apply from: './BuiltBrokenScripts/index.gradle'
 apply plugin: 'forge'
-apply plugin: 'idea'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
+
+ext.buildProps = file "build.properties"
+
+println "Current Minecraft version = " + minecraft.apiVersion
+
+def currentJvm = org.gradle.internal.jvm.Jvm.current()
+println "Current Java version = " + currentJvm
+
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
+if (project.getProperty("bambooshortPlanName") == "BBM-Dev") {
+    group = "dev.builtbroken.samplemod"
+    archivesBaseName = "SampleMod"
+} else {
+    group = "dev.builtbroken.samplemod"
+    archivesBaseName = "SampleMod"
+}
+
+println archivesBaseName 
+
+version = "${project.minecraft.version}-${config.version.mod.major}.${config.version.mod.minor}.${config.version.mod.revis}b"
+
+// This is used to set the local version
+if (project.hasProperty("bambooBuildNumber"))
+    version += project.bambooBuildNumber
+else
+    version += getDate()
+
+println "version = "+ version
+
+minecraft {
+	replace "@MAJOR@", config.version.mod.major
+	replace "@MINOR@", config.version.mod.minor
+	replace "@REVIS@", config.version.mod.revis
+	
+	if (project.hasProperty("bambooBuildNumber")) {
+		replace "@BUILD@", project.bambooBuildNumber
+	}
+	else {
+		replace "@BUILD@", getDate()
+	}
+}
+processResources {
+	from(sourceSets.main.resources.srcDirs) {
+		//include '**/*.lang'
+		include '**/*.info'
+		include '**/*.properties'
+
+		expand 'version': project.version, 'mcversion': project.minecraft.version
+		// replace version and MCVersion
+	}
+
+	// copy everything else, thats not text
+	from(sourceSets.main.resources.srcDirs) {
+		exclude '**/*.info'
+		exclude '**/*.properties'
+	}
+}
+
+publishing {
+  publications {
+    myPublication(MavenPublication) {      
+      pom.withXml {
+        from components.java
+        asNode().appendNode('description', 'Created on ' + getDate())        
+        def deps = configurations.compile.allDependencies
+        def dep_node = asNode().appendNode('dependencies')
+        
+        def dependencyNode = dep_node.appendNode('dependency')
+            dependencyNode.appendNode('groupId', 'net.industrial-craft')
+            dependencyNode.appendNode('artifactId', 'industrialcraft-2')
+            dependencyNode.appendNode('version', '2.2.654-experimental')
+        dependencyNode = dep_node.appendNode('dependency')
+            dependencyNode.appendNode('groupId', 'net.minecraftforge')
+            dependencyNode.appendNode('artifactId', 'forge')
+            dependencyNode.appendNode('version', project.version.forge)
+      }
+    }
+  }
+}
+
+
+archivesBaseName = "SampleMod"
 
 repositories {
     maven {
-	name 'Calclavia Maven'
-	url 'http://calclavia.com/maven'
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
     }
     maven {
-	name = "forge"
-	url = "http://files.minecraftforge.net/maven"
+        name 'CB Repo'
+        url "http://chickenbones.net/maven/"
     }
-    maven { // the repo from which to get NEI and stuff
-	name 'CB Repo'
-	url "http://chickenbones.net/maven"
-    }
-    ivy {
-	name 'FMP'
-	artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
-    }
-}
-
-dependencies {
-    // Would really like to switch to using the new method, so gradle 2 can be used.
-    //compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${config.version.universalelectricity}", ext: 'jar', classifier: "dev"
-    compile 'dev.calclavia.universalelectricity:universal-electricity:+:dev'
-}
-
-group = "samplemod"
-archivesBaseName = "SampleMod"
-
-minecraft {
-    version = "${versionNumber}-test"
-}
-
-processResources {
-    from 'build.properties'
-}
-
-allprojects {
-    version = "${config.version.minecraft}-${config.version.mod.major}.${config.version.mod.minor}.${config.version.mod.revis}"
-    
-    if (System.getenv("BUILD_NUMBER") != null) {
-        version += ".${System.getenv("BUILD_NUMBER")}"
-    } else {
-        version += "-ManuallyBuilt"
-    }
-    
-    jar {
-        dependsOn ":copyBuildXml"
-        destinationDir = file (rootProject.getRootDir().getPath() + '/output')
-    }
-	
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                artifact jar
-            }
-        }
-        repositories {
-            maven {
-                url "file://var/www/maven"
-            }
-        }
+    maven { 
+        name 'OC Maven'
+        url = "http://maven.cil.li/" }
+    maven {
+        name = "ic2"
+        url = "http://maven.ic2.player.to/"
     }
 }
- 
-task copyBuildXml(type: Copy) {
-    from 'build.properties'
-    into 'output'
+
+dependencies 
+{
+    testCompile 'junit:junit:4.11'
+    compile 'junit:junit:4.11'
+    compile "mcp.mobius.waila:Waila:1.5.8a_1.7.10"
+    compile "li.cil.oc:OpenComputers:MC1.7.10-1.4.0.+:dev"
+    compile "net.industrial-craft:industrialcraft-2:2.2.654-experimental:api"
 }
 
-build.dependsOn "copyBuildXml"
-
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmmss')
+    return formattedDate
+}
