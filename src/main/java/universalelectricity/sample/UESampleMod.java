@@ -9,7 +9,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import resonant.lib.mod.content.ModManager;
+import com.builtbroken.lib.mod.content.ModManager;
 import scala.actors.threadpool.Arrays;
 import universalelectricity.sample.wires.TileWire;
 

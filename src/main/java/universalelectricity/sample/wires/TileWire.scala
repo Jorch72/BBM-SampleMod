@@ -5,15 +5,15 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.{Items, Blocks}
 import net.minecraft.util.{ChatComponentText, IIcon}
 import net.minecraftforge.common.util.ForgeDirection
-import resonant.api.tile.INodeProvider
-import resonant.api.tile.node.INode
-import resonant.engine.References
-import resonant.lib.grid.electric.NodeElectric
-import resonant.lib.grid.energy.EnergyStorage
-import resonant.lib.prefab.TEnergyBuffer
+import com.builtbroken.api.tile.INodeProvider
+import com.builtbroken.api.tile.node.INode
+import com.builtbroken.mod.References
+import com.builtbroken.lib.grid.electric.NodeElectric
+import com.builtbroken.lib.grid.energy.EnergyStorage
+import com.builtbroken.lib.prefab.TEnergyBuffer
 import net.minecraft.block.Block
-import resonant.lib.prefab.tile.TileNode
-import resonant.lib.transform.vector.Vector3
+import com.builtbroken.lib.prefab.tile.TileNode
+import com.builtbroken.lib.transform.vector.Vector3
 
 
 /**

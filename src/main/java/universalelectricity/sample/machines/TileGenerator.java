@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
-import resonant.lib.prefab.tile.TileElectricInventory;
+import com.builtbroken.lib.prefab.tile.TileElectricInventory;
 
 /**
  * Created by robert on 8/24/2014.

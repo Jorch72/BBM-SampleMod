@@ -1,7 +1,7 @@
 package universalelectricity.sample.machines;
 
 import net.minecraft.block.material.Material;
-import resonant.lib.prefab.tile.TileElectric;
+import com.builtbroken.lib.prefab.tile.TileElectric;
 
 /**
  * Created by robert on 8/24/2014.
