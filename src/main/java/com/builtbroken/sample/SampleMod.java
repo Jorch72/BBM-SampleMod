@@ -12,7 +12,7 @@ import net.minecraft.block.Block;
 /**
  * Created by robert on 8/22/2014.
  */
-@Mod(modid = SampleMod.NAME, name = SampleMod.MOD_ID, version = "@MAJOR@.@MINOR@.@REVIS@.@BUILD@", dependencies = "required-after:ResonantEngine")
+@Mod(modid = SampleMod.NAME, name = SampleMod.MOD_ID, version = "@MAJOR@.@MINOR@.@REVIS@.@BUILD@", dependencies = "required-after:VoltzEngine")
 public class SampleMod extends AbstractMod
 {
     public static final String NAME = "Voltz Engine Sample Mod";
