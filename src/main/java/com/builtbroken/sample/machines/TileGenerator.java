@@ -1,24 +1,24 @@
-package universalelectricity.sample.machines;
+package com.builtbroken.sample.machines;
 
+import com.builtbroken.mc.prefab.tile.TileModuleMachine;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
-import com.builtbroken.lib.prefab.tile.TileElectricInventory;
 
 /**
  * Created by robert on 8/24/2014.
  */
-public class TileGenerator extends TileElectricInventory
+public class TileGenerator extends TileModuleMachine
 {
     int ticksToBurn = 0;
 
     public TileGenerator()
     {
-        super(Material.rock);
-        setCapacity(10000);
-        setMaxReceive(0);
-        setMaxExtract(1000);
+        super("EnergyGenerator", Material.rock);
+        //setCapacity(10000);
+        //setMaxReceive(0);
+        //setMaxExtract(1000);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class TileGenerator extends TileElectricInventory
         }
         if (ticksToBurn > 0)
         {
-            getEnergyStorage().receiveEnergy();
+            //getEnergyStorage().receiveEnergy();
         }
     }
 

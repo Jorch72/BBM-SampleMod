@@ -1,4 +1,4 @@
-package universalelectricity.sample;
+package com.builtbroken.sample;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

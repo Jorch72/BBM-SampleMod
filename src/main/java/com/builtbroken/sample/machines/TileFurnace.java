@@ -1,28 +1,29 @@
-package universalelectricity.sample.machines;
+package com.builtbroken.sample.machines;
 
+import com.builtbroken.mc.prefab.tile.TileModuleMachine;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import com.builtbroken.lib.prefab.tile.TileElectricInventory;
 
 /**
  * Created by robert on 8/24/2014.
  */
-public class TileFurnace extends TileElectricInventory
+public class TileFurnace extends TileModuleMachine
 {
     int currentItemBurnTime;
     public TileFurnace()
     {
-        super(Material.rock);
-        setCapacity(10000D);
-        setMaxReceive(500D);
-        setMaxExtract(0D);
+        super("ElectricEnergy", Material.rock);
+        //setCapacity(10000D);
+        //setMaxReceive(500D);
+        //setMaxExtract(0D);
     }
 
     @Override
     public void update()
     {
         super.update();
+        /**
         if(smeltStack() != null && getEnergyStorage().checkExtract())
         {
             getEnergyStorage().extractEnergy();
@@ -38,6 +39,7 @@ public class TileFurnace extends TileElectricInventory
         {
             currentItemBurnTime = 0;
         }
+         */
     }
 
     /** @return stack in slot one */
