@@ -1,7 +1,9 @@
 package com.builtbroken.sample;
 
+import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
+import com.builtbroken.sample.multiblock.TileMultiblock;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -21,7 +23,7 @@ public class SampleMod extends AbstractMod
     @SidedProxy(clientSide = "com.builtbroken.sample.ClientProxy", serverSide = "com.builtbroken.sample.CommonProxy")
     public static CommonProxy proxy;
 
-    public static Block wire;
+    public static Block multiBlock;
 
     public SampleMod()
     {
@@ -32,6 +34,11 @@ public class SampleMod extends AbstractMod
     public void preInit(FMLPreInitializationEvent evt)
     {
         super.preInit(evt);
+        Engine.requestMultiBlock();
+        Engine.requestOres();
+
+        //TODO turn into rubics cube for the lols
+        multiBlock = getManager().newBlock("smMultiTileTest", TileMultiblock.class);
     }
 
     @Mod.EventHandler
