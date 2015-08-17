@@ -6,6 +6,7 @@ import com.builtbroken.mc.api.tile.multiblock.IMultiTileHost;
 import com.builtbroken.mc.lib.transform.vector.Pos;
 import com.builtbroken.mc.prefab.tile.Tile;
 import com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock;
+import com.builtbroken.mc.prefab.tile.multiblock.MultiBlockHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
@@ -22,6 +23,14 @@ public class TileMultiblock extends Tile implements IMultiTileHost
     public TileMultiblock()
     {
         super("testMultiTile", Material.rock);
+        this.itemBlock = ItemBlockMulti.class;
+
+    }
+
+    @Override
+    public void onWorldJoin()
+    {
+        MultiBlockHelper.buildMultiBlock(getWorldObj(), this);
     }
 
     @Override
@@ -78,16 +87,6 @@ public class TileMultiblock extends Tile implements IMultiTileHost
         HashMap<IPos3D, String> map = new HashMap();
         Pos center = new Pos(this);
         //center layer
-        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, 1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, 1, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 1, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 1, -1), EnumMultiblock.TILE.getName());
-
-        //Top layer
         map.put(center.add(1, 0, 0), EnumMultiblock.TILE.getName());
         map.put(center.add(-1, 0, 0), EnumMultiblock.TILE.getName());
         map.put(center.add(0, 0, 1), EnumMultiblock.TILE.getName());
@@ -97,7 +96,20 @@ public class TileMultiblock extends Tile implements IMultiTileHost
         map.put(center.add(1, 0, -1), EnumMultiblock.TILE.getName());
         map.put(center.add(-1, 0, -1), EnumMultiblock.TILE.getName());
 
+        //Top layer
+        map.put(center.add(0, 1, 0), EnumMultiblock.TILE.getName());
+        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName());
+        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName());
+        map.put(center.add(-1, 1, 0), EnumMultiblock.TILE.getName());
+        map.put(center.add(0, 1, 1), EnumMultiblock.TILE.getName());
+        map.put(center.add(0, 1, -1), EnumMultiblock.TILE.getName());
+        map.put(center.add(1, 1, 1), EnumMultiblock.TILE.getName());
+        map.put(center.add(-1, 1, 1), EnumMultiblock.TILE.getName());
+        map.put(center.add(1, 1, -1), EnumMultiblock.TILE.getName());
+        map.put(center.add(-1, 1, -1), EnumMultiblock.TILE.getName());
+
         //Bottom layer
+        map.put(center.add(0, -1, 0), EnumMultiblock.TILE.getName());
         map.put(center.add(1, -1, 0), EnumMultiblock.TILE.getName());
         map.put(center.add(-1, -1, 0), EnumMultiblock.TILE.getName());
         map.put(center.add(0, -1, 1), EnumMultiblock.TILE.getName());

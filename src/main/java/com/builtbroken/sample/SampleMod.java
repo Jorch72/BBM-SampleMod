@@ -3,6 +3,7 @@ package com.builtbroken.sample;
 import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.lib.mod.AbstractMod;
 import com.builtbroken.mc.lib.mod.AbstractProxy;
+import com.builtbroken.mc.lib.mod.ModCreativeTab;
 import com.builtbroken.sample.multiblock.TileMultiblock;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -10,6 +11,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 
 /**
  * Created by robert on 8/22/2014.
@@ -23,11 +26,15 @@ public class SampleMod extends AbstractMod
     @SidedProxy(clientSide = "com.builtbroken.sample.ClientProxy", serverSide = "com.builtbroken.sample.CommonProxy")
     public static CommonProxy proxy;
 
+    public static CreativeTabs tab;
+
     public static Block multiBlock;
 
     public SampleMod()
     {
         super(MOD_ID);
+        this.tab = new ModCreativeTab("SampleMod", Blocks.beacon);
+        this.getManager().setTab(tab);
     }
 
     @Mod.EventHandler
