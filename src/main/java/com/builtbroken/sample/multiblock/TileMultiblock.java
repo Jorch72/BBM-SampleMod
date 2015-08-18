@@ -87,37 +87,37 @@ public class TileMultiblock extends Tile implements IMultiTileHost
         HashMap<IPos3D, String> map = new HashMap();
         Pos center = new Pos(this);
         //center layer
-        map.put(center.add(1, 0, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 0, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, 0, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, 0, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 0, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 0, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 0, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 0, -1), EnumMultiblock.TILE.getName());
+        map.put(center.add(1, 0, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, 0, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(0, 0, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(0, 0, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, 0, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, 0, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, 0, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, 0, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
 
         //Top layer
-        map.put(center.add(0, 1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, 1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, 1, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, 1, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, 1, -1), EnumMultiblock.TILE.getName());
+        map.put(center.add(0, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(0, 1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(0, 1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, 1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, 1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, 1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, 1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
 
         //Bottom layer
-        map.put(center.add(0, -1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, -1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, -1, 0), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, -1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(0, -1, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, -1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, -1, 1), EnumMultiblock.TILE.getName());
-        map.put(center.add(1, -1, -1), EnumMultiblock.TILE.getName());
-        map.put(center.add(-1, -1, -1), EnumMultiblock.TILE.getName());
+        map.put(center.add(0, -1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, -1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, -1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(0, -1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(0, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, -1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, -1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(1, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        map.put(center.add(-1, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
 
         return map;
     }
