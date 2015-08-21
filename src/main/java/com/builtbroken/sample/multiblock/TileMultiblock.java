@@ -5,10 +5,10 @@ import com.builtbroken.mc.api.tile.client.IIconCallBack;
 import com.builtbroken.mc.api.tile.multiblock.IMultiTile;
 import com.builtbroken.mc.api.tile.multiblock.IMultiTileHost;
 import com.builtbroken.mc.lib.transform.vector.Pos;
-import com.builtbroken.mc.prefab.inventory.InventoryUtility;
 import com.builtbroken.mc.prefab.tile.Tile;
 import com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock;
 import com.builtbroken.mc.prefab.tile.multiblock.MultiBlockHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -100,20 +100,31 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     }
 
     @Override
+    public void onRemove(Block block, int par6)
+    {
+        super.onRemove(block, par6);
+        breakDownStructure();
+    }
+
+    @Override
     public void onMultiTileBroken(IMultiTile tileMulti)
     {
         if (!_destroyingStructure && tileMulti instanceof TileEntity)
         {
-            _destroyingStructure = true;
             Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos(this));
             if (map.containsKey(pos))
             {
-                for (Map.Entry<IPos3D, String> entry : map.entrySet())
-                {
-                    worldObj.setBlockToAir((int) (xi() + entry.getKey().x()), (int) (yi() + entry.getKey().y()), (int) (zi() + entry.getKey().z()));
-                }
-                InventoryUtility.dropBlockAsItem(world(), xi(), yi(), zi(), true);
+                breakDownStructure();
             }
+        }
+    }
+
+    private void breakDownStructure()
+    {
+        if (!_destroyingStructure)
+        {
+            _destroyingStructure = true;
+            MultiBlockHelper.destroyMultiBlockStructure(this);
             _destroyingStructure = false;
         }
     }
