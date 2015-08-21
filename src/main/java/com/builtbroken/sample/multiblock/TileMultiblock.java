@@ -65,6 +65,8 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
         map.put(new Pos(-1, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
     }
 
+    private boolean _destroyingStructure = false;
+
     public TileMultiblock()
     {
         super("testMultiTile", Material.rock);
@@ -73,8 +75,9 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     }
 
     @Override
-    public void onWorldJoin()
+    public void firstTick()
     {
+        super.firstTick();
         MultiBlockHelper.buildMultiBlock(world(), this, true);
     }
 
@@ -99,16 +102,19 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     @Override
     public void onMultiTileBroken(IMultiTile tileMulti)
     {
-        if (tileMulti instanceof TileEntity)
+        if (!_destroyingStructure && tileMulti instanceof TileEntity)
         {
-            if (map.containsKey(new Pos(this).sub(new Pos((TileEntity) tileMulti))))
+            _destroyingStructure = true;
+            Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos(this));
+            if (map.containsKey(pos))
             {
                 for (Map.Entry<IPos3D, String> entry : map.entrySet())
                 {
                     worldObj.setBlockToAir((int) (xi() + entry.getKey().x()), (int) (yi() + entry.getKey().y()), (int) (zi() + entry.getKey().z()));
                 }
-                InventoryUtility.dropBlockAsItem(world(), xi(), yi(), zi(), false);
+                InventoryUtility.dropBlockAsItem(world(), xi(), yi(), zi(), true);
             }
+            _destroyingStructure = false;
         }
     }
 
@@ -125,12 +131,13 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     }
 
     @Override
-    public void onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit)
+    public boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit)
     {
         if (isServer())
         {
             player.addChatComponentMessage(new ChatComponentText("Hello you right clicked the " + ForgeDirection.getOrientation(side) + " side  of " + tile));
         }
+        return true;
     }
 
     @Override
