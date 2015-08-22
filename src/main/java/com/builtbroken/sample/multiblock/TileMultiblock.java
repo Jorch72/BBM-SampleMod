@@ -112,6 +112,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
         if (!_destroyingStructure && tileMulti instanceof TileEntity)
         {
             Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos(this));
+            System.out.println("onMultiTileBroken event received from " + pos);
             if (map.containsKey(pos))
             {
                 breakDownStructure();
