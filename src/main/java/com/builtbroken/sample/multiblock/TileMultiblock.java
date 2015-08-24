@@ -31,38 +31,17 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
 
     static
     {
-        //center layer
-        map.put(new Pos(1, 0, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, 0, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(0, 0, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(0, 0, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, 0, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, 0, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, 0, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, 0, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-
-        //Top layer
-        map.put(new Pos(0, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, 1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(0, 1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(0, 1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, 1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, 1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, 1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, 1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-
-        //Bottom layer
-        map.put(new Pos(0, -1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, -1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, -1, 0), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(0, -1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(0, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, -1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, -1, 1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(1, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
-        map.put(new Pos(-1, -1, -1), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+        for (int i = -1; i < 2; i++)
+        {
+            for (int j = -1; j < 2; j++)
+            {
+                for (int k = -1; k < 2; k++)
+                {
+                    if (i != 0 || j != 0 || k != 0)
+                        map.put(new Pos(i, j, k), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+                }
+            }
+        }
     }
 
     private boolean _destroyingStructure = false;
@@ -112,11 +91,14 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
         if (!_destroyingStructure && tileMulti instanceof TileEntity)
         {
             Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos(this));
-            System.out.println("onMultiTileBroken event received from " + pos);
             if (map.containsKey(pos))
             {
                 breakDownStructure();
+            } else
+            {
+                System.out.println("Error: " + pos + " is not in the structure data map");
             }
+
         }
     }
 
@@ -166,6 +148,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     {
         HashMap<IPos3D, String> newMap = new HashMap();
         Pos center = new Pos(this);
+
         for (Map.Entry<IPos3D, String> entry : map.entrySet())
         {
             newMap.put(center.add(entry.getKey()), entry.getValue());
@@ -193,5 +176,11 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
                 return Blocks.bedrock.blockIcon;
         }
         return Blocks.iron_block.blockIcon;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "TileMultiblock[Dim@" + (world() != null && world().provider != null ? world().provider.dimensionId : "null") + " " + xCoord + "x " + yCoord + "y " + zCoord + "z ]";
     }
 }
