@@ -15,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -82,44 +81,40 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     public void onRemove(Block block, int par6)
     {
         super.onRemove(block, par6);
-        breakDownStructure();
+        breakDownStructure(true);
     }
 
     @Override
-    public void onMultiTileBroken(IMultiTile tileMulti)
+    public boolean onMultiTileBroken(IMultiTile tileMulti, Object source, boolean harvest)
     {
         if (!_destroyingStructure && tileMulti instanceof TileEntity)
         {
             Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos(this));
             if (map.containsKey(pos))
             {
-                breakDownStructure();
-            } else
+                breakDownStructure(harvest);
+                return true;
+            }
+            else
             {
                 System.out.println("Error: " + pos + " is not in the structure data map");
             }
-
         }
+        return false;
     }
 
-    private void breakDownStructure()
+    private void breakDownStructure(boolean b)
     {
         if (!_destroyingStructure)
         {
             _destroyingStructure = true;
-            MultiBlockHelper.destroyMultiBlockStructure(this);
+            MultiBlockHelper.destroyMultiBlockStructure(this, b);
             _destroyingStructure = false;
         }
     }
 
     @Override
     public void onTileInvalidate(IMultiTile tileMulti)
-    {
-
-    }
-
-    @Override
-    public void onMultiTileBrokenByExplosion(IMultiTile tile, Explosion ex)
     {
 
     }
