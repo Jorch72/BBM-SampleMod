@@ -95,10 +95,6 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
                 breakDownStructure(harvest);
                 return true;
             }
-            else
-            {
-                System.out.println("Error: " + pos + " is not in the structure data map");
-            }
         }
         return false;
     }
