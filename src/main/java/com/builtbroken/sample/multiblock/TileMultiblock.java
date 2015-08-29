@@ -154,19 +154,19 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
         switch (ForgeDirection.getOrientation(side))
         {
             case NORTH:
-                return Blocks.stone.blockIcon;
+                return Blocks.stone.getIcon(0, 0);
             case SOUTH:
-                return Blocks.gold_block.blockIcon;
+                return Blocks.gold_block.getIcon(0, 0);
             case EAST:
-                return Blocks.iron_block.blockIcon;
+                return Blocks.iron_block.getIcon(0, 0);
             case WEST:
-                return Blocks.diamond_block.blockIcon;
+                return Blocks.diamond_block.getIcon(0, 0);
             case UP:
-                return Blocks.grass.blockIcon;
+                return Blocks.grass.getIcon(0, 0);
             case DOWN:
-                return Blocks.bedrock.blockIcon;
+                return Blocks.bedrock.getIcon(0, 0);
         }
-        return Blocks.iron_block.blockIcon;
+        return Blocks.iron_block.getIcon(0, 0);
     }
 
     @Override
