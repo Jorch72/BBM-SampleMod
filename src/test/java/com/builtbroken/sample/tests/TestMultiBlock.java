@@ -2,7 +2,6 @@ package com.builtbroken.sample.tests;
 
 import com.builtbroken.mc.core.Engine;
 import com.builtbroken.mc.core.proxy.NEIProxy;
-import com.builtbroken.mc.core.registry.ModManager;
 import com.builtbroken.mc.prefab.tile.BlockTile;
 import com.builtbroken.mc.prefab.tile.multiblock.BlockMultiblock;
 import com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock;
@@ -12,9 +11,7 @@ import com.builtbroken.mc.testing.junit.AbstractTest;
 import com.builtbroken.mc.testing.junit.ModRegistry;
 import com.builtbroken.mc.testing.junit.VoltzTestRunner;
 import com.builtbroken.mc.testing.junit.world.FakeWorld;
-import com.builtbroken.mc.testing.junit.world.FakeWorldWithChunks;
 import com.builtbroken.sample.multiblock.TileMultiblock;
-import cpw.mods.fml.common.registry.GameRegistry;
 import junit.framework.Assert;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -53,7 +50,7 @@ public class TestMultiBlock extends AbstractTest
 
     public void testPlacement()
     {
-        World world = FakeWorldWithChunks.newWorld("MultiBlockTest");
+        World world = FakeWorld.newWorld("MultiBlockTest");
         assertTrue("Area should be empty", isPlacementAir(world));
         world.setBlock(0, 10, 0, block);
         world.updateEntities();
@@ -85,7 +82,7 @@ public class TestMultiBlock extends AbstractTest
 
     public void testRemovalOfPeace()
     {
-        FakeWorldWithChunks world = FakeWorldWithChunks.newWorld("MultiBlockTest");
+        FakeWorld world = FakeWorld.newWorld("MultiBlockTest");
         //world.debugInfo = true;
         assertTrue("Area should be empty", isPlacementAir(world));
         world.setBlock(0, 10, 0, block);
@@ -119,7 +116,7 @@ public class TestMultiBlock extends AbstractTest
 
     public void testRemovalOfCore()
     {
-        World world = FakeWorldWithChunks.newWorld("MultiBlockTest");
+        World world = FakeWorld.newWorld("MultiBlockTest");
         assertTrue("Area should be empty", isPlacementAir(world));
         world.setBlock(0, 10, 0, block);
         world.updateEntities();
