@@ -1,7 +1,6 @@
 package com.builtbroken.sample.tests;
 
 import com.builtbroken.mc.core.Engine;
-import com.builtbroken.mc.core.proxy.NEIProxy;
 import com.builtbroken.mc.prefab.tile.BlockTile;
 import com.builtbroken.mc.prefab.tile.multiblock.BlockMultiblock;
 import com.builtbroken.mc.prefab.tile.multiblock.EnumMultiblock;
