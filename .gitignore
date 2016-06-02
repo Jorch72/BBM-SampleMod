@@ -41,9 +41,6 @@ lib/1.6.4/
 /nbbuild/
 lib/
 output/
-gradlew
-gradlew.bat
-gradle/
 install.bat
 .cache
 build.xml
