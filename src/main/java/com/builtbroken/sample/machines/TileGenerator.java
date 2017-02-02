@@ -1,7 +1,9 @@
 package com.builtbroken.sample.machines;
 
 import com.builtbroken.mc.prefab.tile.TileModuleMachine;
+import com.builtbroken.mc.prefab.tile.module.TileModuleInventory;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -19,6 +21,12 @@ public class TileGenerator extends TileModuleMachine
         //setCapacity(10000);
         //setMaxReceive(0);
         //setMaxExtract(1000);
+    }
+
+    @Override
+    protected IInventory createInventory()
+    {
+        return new TileModuleInventory(this, 1);
     }
 
     @Override

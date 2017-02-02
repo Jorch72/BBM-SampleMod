@@ -1,12 +1,12 @@
 package com.builtbroken.sample.machines;
 
-import com.builtbroken.mc.prefab.tile.TileModuleMachine;
+import com.builtbroken.mc.prefab.tile.TileModuleMachineBase;
 import net.minecraft.block.material.Material;
 
 /**
  * Created by robert on 8/24/2014.
  */
-public class TileLight extends TileModuleMachine
+public class TileLight extends TileModuleMachineBase
 {
     public boolean isPowered = false;
 

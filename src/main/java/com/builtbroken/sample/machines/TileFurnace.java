@@ -1,7 +1,9 @@
 package com.builtbroken.sample.machines;
 
 import com.builtbroken.mc.prefab.tile.TileModuleMachine;
+import com.builtbroken.mc.prefab.tile.module.TileModuleInventory;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 
@@ -17,6 +19,12 @@ public class TileFurnace extends TileModuleMachine
         //setCapacity(10000D);
         //setMaxReceive(500D);
         //setMaxExtract(0D);
+    }
+
+    @Override
+    protected IInventory createInventory()
+    {
+        return new TileModuleInventory(this, 3);
     }
 
     @Override
