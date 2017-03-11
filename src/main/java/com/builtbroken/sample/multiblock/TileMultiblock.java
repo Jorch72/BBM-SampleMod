@@ -37,7 +37,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
                 for (int k = -1; k < 2; k++)
                 {
                     if (i != 0 || j != 0 || k != 0)
-                        map.put(new Pos(i, j, k), EnumMultiblock.TILE.getName() + "#RenderBlock=true");
+                        map.put(new Pos(i, j, k), EnumMultiblock.TILE.getTileName() + "#RenderBlock=true");
                 }
             }
         }
@@ -70,7 +70,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     {
         if (tileMulti instanceof TileEntity)
         {
-            if (map.containsKey(new Pos(this).sub(new Pos((TileEntity) tileMulti))))
+            if (map.containsKey(new Pos((TileEntity)this).sub(new Pos((TileEntity) tileMulti))))
             {
                 tileMulti.setHost(this);
             }
@@ -89,7 +89,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     {
         if (!_destroyingStructure && tileMulti instanceof TileEntity)
         {
-            Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos(this));
+            Pos pos = new Pos((TileEntity) tileMulti).sub(new Pos((TileEntity)this));
             if (map.containsKey(pos))
             {
                 breakDownStructure(harvest);
@@ -138,7 +138,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     public HashMap<IPos3D, String> getLayoutOfMultiBlock()
     {
         HashMap<IPos3D, String> newMap = new HashMap();
-        Pos center = new Pos(this);
+        Pos center = new Pos((TileEntity)this);
 
         for (Map.Entry<IPos3D, String> entry : map.entrySet())
         {
