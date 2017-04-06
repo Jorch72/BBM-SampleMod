@@ -17,7 +17,7 @@ import net.minecraft.init.Blocks;
 /**
  * Created by robert on 8/22/2014.
  */
-@Mod(modid = SampleMod.NAME, name = SampleMod.MOD_ID, version = "0.0.1", dependencies = "required-after:VoltzEngine")
+@Mod(modid = SampleMod.NAME, name = SampleMod.MOD_ID, version = "0.0.1", dependencies = "required-after:voltzengine")
 public class SampleMod extends AbstractMod
 {
     public static final String NAME = "Voltz Engine Sample Mod";

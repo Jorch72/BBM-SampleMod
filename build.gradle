@@ -33,18 +33,18 @@ apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply from: 'https://raw.githubusercontent.com/BuiltBrokenModding/BuiltBrokenScripts/buildScripts/scripts/forge/deps.gradle'
 
-minecraft {    
-    replace "required-after:VoltzEngine", "required-after:VoltzEngine@[$voltz_engine_version,)"
+minecraft {
+    replace "required-after:voltzengine", "required-after:voltzengine@[$voltz_engine_version,)"
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-dependencies 
+dependencies
 {
     if (project.hasProperty("bambooshortPlanName") && project.getProperty("bambooshortPlanName") == "BBM-Dev")
     compile "dev.builtbroken.voltzengine:VoltzEngine:1.7.10-$voltz_engine_version+:deobf-dev"
-    else 
+    else
     compile "com.builtbroken.voltzengine:VoltzEngine:1.7.10-$voltz_engine_version+:deobf"
 }
 
