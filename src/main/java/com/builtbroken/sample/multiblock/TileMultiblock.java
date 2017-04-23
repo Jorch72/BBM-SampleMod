@@ -116,7 +116,7 @@ public class TileMultiblock extends Tile implements IMultiTileHost, IIconCallBac
     }
 
     @Override
-    public boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, IPos3D hit)
+    public boolean onMultiTileActivated(IMultiTile tile, EntityPlayer player, int side, float xHit, float yHit, float zHit)
     {
         if (isServer())
         {
